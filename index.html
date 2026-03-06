@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kadınlar Günü Kutlu Olsun</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffe0ec, #ffd6f5, #fff2cc);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 30px;
+      max-width: 900px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 24px;
+      padding: 40px 28px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      color: #b03060;
+      line-height: 1.2;
+      text-shadow: 0 2px 10px rgba(255,255,255,0.4);
+      margin-bottom: 18px;
+    }
+
+    p {
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      color: #6d3b52;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      color: #d81b60;
+      font-weight: bold;
+    }
+
+    .flower {
+      position: absolute;
+      top: -60px;
+      font-size: 24px;
+      animation: fall linear forwards;
+      opacity: 0.9;
+      z-index: 1;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) translateX(120px) rotate(360deg);
+        opacity: 0.2;
+      }
+    }
+
+    .heart {
+      margin-top: 20px;
+      font-size: 2rem;
+      animation: pulse 1.6s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Kadınlar Gününüz Kutlu Olsun <span class="highlight" id="nameArea">Ayşe Hanım</span></h1>
+      <p>
+        Gülüşünüz kadar güzel, kalbiniz kadar özel bir gün olsun.
+        Hayatınıza mutluluk, zarafet ve bolca neşe eşlik etsin.
+      </p>
+      <div class="heart">🌷💖🌸</div>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const isim = params.get("isim");
+
+    if (isim) {
+      document.getElementById("nameArea").textContent = isim + " Hanım";
+    }
+
+    const flowers = ["🌸", "🌷", "💐", "🌺", "🌹", "🌼"];
+
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.classList.add("flower");
+      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+      flower.style.left = Math.random() * window.innerWidth + "px";
+      flower.style.animationDuration = (4 + Math.random() * 6) + "s";
+      flower.style.fontSize = (18 + Math.random() * 24) + "px";
+      flower.style.transform = `rotate(${Math.random() * 360}deg)`;
+      document.body.appendChild(flower);
+
+      setTimeout(() => {
+        flower.remove();
+      }, 10000);
+    }
+
+    setInterval(createFlower, 250);
+
+    for (let i = 0; i < 20; i++) {
+      setTimeout(createFlower, i * 120);
+    }
+  </script>
+</body>
+</html>
