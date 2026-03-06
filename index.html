@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kadınlar Günü Kutlu Olsun</title>
+  <title>Kadınlar Gününüz Kutlu Olsun</title>
   <style>
     * {
       margin: 0;
@@ -11,100 +11,288 @@
       box-sizing: border-box;
     }
 
+    :root {
+      --bg1: #ffd9e8;
+      --bg2: #ffe8f2;
+      --bg3: #fff2d9;
+      --text-main: #b03060;
+      --text-sub: #6d3b52;
+      --accent: #d81b60;
+      --card-bg: rgba(255, 255, 255, 0.40);
+      --card-border: rgba(255, 255, 255, 0.45);
+      --shadow: rgba(176, 48, 96, 0.16);
+    }
+
     body {
-      overflow: hidden;
       font-family: Arial, sans-serif;
-      height: 100vh;
-      background: linear-gradient(135deg, #ffe0ec, #ffd6f5, #fff2cc);
+      min-height: 100vh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.55), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255,255,255,0.35), transparent 30%),
+        linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
     }
 
-    .container {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 30px;
-      max-width: 900px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.45);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 24px;
-      padding: 40px 28px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
-    }
-
-    h1 {
-      font-size: clamp(2rem, 5vw, 4.2rem);
-      color: #b03060;
-      line-height: 1.2;
-      text-shadow: 0 2px 10px rgba(255,255,255,0.4);
-      margin-bottom: 18px;
-    }
-
-    p {
-      font-size: clamp(1rem, 2vw, 1.35rem);
-      color: #6d3b52;
-      line-height: 1.6;
-    }
-
-    .highlight {
-      color: #d81b60;
-      font-weight: bold;
-    }
-
-    .flower {
+    .glow {
       position: absolute;
-      top: -60px;
-      font-size: 24px;
-      animation: fall linear forwards;
-      opacity: 0.9;
-      z-index: 1;
-      user-select: none;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      background: rgba(255, 182, 213, 0.20);
+      filter: blur(80px);
+      z-index: 0;
+      animation: floatGlow 8s ease-in-out infinite;
       pointer-events: none;
     }
 
-    @keyframes fall {
+    .glow.one {
+      top: -120px;
+      left: -100px;
+    }
+
+    .glow.two {
+      bottom: -140px;
+      right: -80px;
+      animation-delay: -4s;
+    }
+
+    @keyframes floatGlow {
+      0%, 100% {
+        transform: translateY(0) translateX(0) scale(1);
+      }
+      50% {
+        transform: translateY(20px) translateX(10px) scale(1.08);
+      }
+    }
+
+    .container {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 920px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .card {
+      position: relative;
+      background: var(--card-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 44px 28px;
+      box-shadow:
+        0 12px 50px rgba(0, 0, 0, 0.10),
+        0 0 0 1px rgba(255,255,255,0.15) inset;
+      overflow: hidden;
+      animation: cardEntrance 1.2s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.18),
+        rgba(255,255,255,0.04)
+      );
+      pointer-events: none;
+    }
+
+    @keyframes cardEntrance {
       0% {
-        transform: translateY(-10vh) translateX(0) rotate(0deg);
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    h1 {
+      position: relative;
+      z-index: 2;
+      font-size: clamp(2.1rem, 5vw, 4.5rem);
+      line-height: 1.18;
+      color: var(--text-main);
+      text-shadow: 0 3px 14px rgba(255,255,255,0.40);
+      margin-bottom: 18px;
+      animation: fadeUp 1.3s ease both;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    p {
+      position: relative;
+      z-index: 2;
+      font-size: clamp(1rem, 2vw, 1.35rem);
+      line-height: 1.7;
+      color: var(--text-sub);
+      max-width: 700px;
+      margin: 0 auto;
+      animation: fadeUp 1.7s ease both;
+    }
+
+    .decor {
+      position: relative;
+      z-index: 2;
+      margin-top: 22px;
+      font-size: 2rem;
+      letter-spacing: 6px;
+      animation: fadeUp 2s ease both, pulseSoft 2.4s ease-in-out infinite;
+      user-select: none;
+    }
+
+    @keyframes fadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulseSoft {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.04);
+      }
+    }
+
+    .petal,
+    .heart-burst {
+      position: absolute;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .petal {
+      top: -10vh;
+      z-index: 1;
+      opacity: 0.95;
+      animation-name: petalFall;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.08));
+    }
+
+    @keyframes petalFall {
+      0% {
+        transform: translate3d(0, -10vh, 0) rotate(0deg);
         opacity: 0;
       }
       10% {
         opacity: 1;
       }
       100% {
-        transform: translateY(110vh) translateX(120px) rotate(360deg);
+        transform: translate3d(var(--driftX), 110vh, 0) rotate(360deg);
         opacity: 0.2;
       }
     }
 
-    .heart {
-      margin-top: 20px;
-      font-size: 2rem;
-      animation: pulse 1.6s infinite;
+    .heart-burst {
+      left: 50%;
+      top: 50%;
+      z-index: 5;
+      font-size: 24px;
+      animation: burstFly 1.8s ease-out forwards;
+      filter: drop-shadow(0 4px 10px rgba(216, 27, 96, 0.25));
     }
 
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
+    @keyframes burstFly {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+      }
+      15% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(
+          calc(-50% + var(--x)),
+          calc(-50% + var(--y))
+        ) scale(1.8);
+      }
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      z-index: 4;
+      pointer-events: none;
+      animation: sparkleFly 1.2s ease-out forwards;
+    }
+
+    @keyframes sparkleFly {
+      0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.4);
+      }
+      20% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        transform: translate(
+          calc(-50% + var(--sx)),
+          calc(-50% + var(--sy))
+        ) scale(1.5);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 34px 20px;
+        border-radius: 22px;
+      }
+
+      .decor {
+        font-size: 1.7rem;
+        letter-spacing: 4px;
+      }
+
+      .highlight {
+        white-space: normal;
+      }
     }
   </style>
 </head>
 <body>
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
   <div class="container">
     <div class="card">
-      <h1>Kadınlar Gününüz Kutlu Olsun <span class="highlight" id="nameArea">Ayşe Hanım</span></h1>
+      <h1>
+        Kadınlar Gününüz Kutlu Olsun
+        <span class="highlight" id="nameArea">Ayşe Hanım</span>
+      </h1>
+
       <p>
-        Gülüşünüz kadar güzel, kalbiniz kadar özel bir gün olsun.
-        Hayatınıza mutluluk, zarafet ve bolca neşe eşlik etsin.
+        Güçlü, ilham veren ve dünyayı değiştiren tüm kadınlara.
       </p>
-      <div class="heart">🌷💖🌸</div>
+
+      <div class="decor">🌸 💖 🌷</div>
     </div>
   </div>
 
@@ -112,32 +300,91 @@
     const params = new URLSearchParams(window.location.search);
     const isim = params.get("isim");
 
-    if (isim) {
-      document.getElementById("nameArea").textContent = isim + " Hanım";
+    if (isim && isim.trim() !== "") {
+      document.getElementById("nameArea").textContent = isim;
     }
 
-    const flowers = ["🌸", "🌷", "💐", "🌺", "🌹", "🌼"];
+    const petals = ["🌸", "🌺", "🌷", "💮", "🩷"];
+    const burstHearts = ["💖", "💗", "💕", "💞", "🌸"];
 
-    function createFlower() {
-      const flower = document.createElement("div");
-      flower.classList.add("flower");
-      flower.textContent = flowers[Math.floor(Math.random() * flowers.length)];
-      flower.style.left = Math.random() * window.innerWidth + "px";
-      flower.style.animationDuration = (4 + Math.random() * 6) + "s";
-      flower.style.fontSize = (18 + Math.random() * 24) + "px";
-      flower.style.transform = `rotate(${Math.random() * 360}deg)`;
-      document.body.appendChild(flower);
+    function createPetal() {
+      const petal = document.createElement("div");
+      petal.className = "petal";
+      petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+
+      const size = 18 + Math.random() * 20;
+      const left = Math.random() * window.innerWidth;
+      const duration = 6 + Math.random() * 6;
+      const drift = (-120 + Math.random() * 240) + "px";
+
+      petal.style.left = left + "px";
+      petal.style.fontSize = size + "px";
+      petal.style.animationDuration = duration + "s";
+      petal.style.setProperty("--driftX", drift);
+
+      document.body.appendChild(petal);
 
       setTimeout(() => {
-        flower.remove();
-      }, 10000);
+        petal.remove();
+      }, duration * 1000);
     }
 
-    setInterval(createFlower, 250);
+    function startPetals() {
+      for (let i = 0; i < 18; i++) {
+        setTimeout(createPetal, i * 180);
+      }
 
-    for (let i = 0; i < 20; i++) {
-      setTimeout(createFlower, i * 120);
+      setInterval(createPetal, 320);
     }
+
+    function createHeartBurst() {
+      for (let i = 0; i < 18; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart-burst";
+        heart.textContent = burstHearts[Math.floor(Math.random() * burstHearts.length)];
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 80 + Math.random() * 170;
+        const x = Math.cos(angle) * distance + "px";
+        const y = Math.sin(angle) * distance + "px";
+
+        heart.style.setProperty("--x", x);
+        heart.style.setProperty("--y", y);
+        heart.style.fontSize = (18 + Math.random() * 18) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 1800);
+      }
+
+      for (let i = 0; i < 14; i++) {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        sparkle.style.left = "50%";
+        sparkle.style.top = "50%";
+
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 70 + Math.random() * 160;
+        const sx = Math.cos(angle) * distance + "px";
+        const sy = Math.sin(angle) * distance + "px";
+
+        sparkle.style.setProperty("--sx", sx);
+        sparkle.style.setProperty("--sy", sy);
+
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => {
+          sparkle.remove();
+        }, 1200);
+      }
+    }
+
+    window.addEventListener("load", () => {
+      createHeartBurst();
+      startPetals();
+    });
   </script>
 </body>
 </html>
